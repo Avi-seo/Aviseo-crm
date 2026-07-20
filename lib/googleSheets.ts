@@ -22,6 +22,7 @@ const FIELD_HEADER_CANDIDATES: Record<keyof Omit<Prospect, "id">, string[]> = {
   email: ["email"],
   telephone: ["phone_number", "telephone"],
   source: ["source"],
+  medium: ["medium"],
   campagne: ["campagne"],
   formulaire: ["formulaire"],
   leadStatus: ["lead_status", "leadstatus"],
