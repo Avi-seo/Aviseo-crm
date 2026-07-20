@@ -116,7 +116,7 @@ export default function Home() {
         <ProspectDrawer
           prospect={prospects.find((p) => p.id === selected.id) || selected}
           onClose={() => setSelected(null)}
-          onSave={updateProspect}
+          onSave={async (input) => { await updateProspect(input); }}
           onAddNote={async (id, auteur, contenu) => { await addNote(id, auteur, contenu); }}
         />
       )}
@@ -124,7 +124,7 @@ export default function Home() {
       {showNew && (
         <NewProspectModal
           onClose={() => setShowNew(false)}
-          onCreate={createProspect}
+          onCreate={async (input) => { await createProspect(input); }}
         />
       )}
 
