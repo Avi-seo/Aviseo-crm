@@ -116,7 +116,7 @@ export default function Home() {
         <ProspectDrawer
           prospect={prospects.find((p) => p.id === selected.id) || selected}
           onClose={() => setSelected(null)}
-          onSave={async (input) => { await updateProspect(input); }}
+         onSave={async (id, patch) => { await updateProspect(id, patch); }}
           onAddNote={async (id, auteur, contenu) => { await addNote(id, auteur, contenu); }}
         />
       )}
