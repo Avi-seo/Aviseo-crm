@@ -117,7 +117,7 @@ export default function Home() {
           prospect={prospects.find((p) => p.id === selected.id) || selected}
           onClose={() => setSelected(null)}
           onSave={updateProspect}
-          onAddNote={(id, auteur, contenu) => { addNote(id, auteur, contenu); }}
+          onAddNote={async (id, auteur, contenu) => { await addNote(id, auteur, contenu); }}
         />
       )}
 
