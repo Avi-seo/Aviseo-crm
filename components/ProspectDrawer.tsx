@@ -38,7 +38,53 @@ const FIELD_LABELS: { key: keyof ProspectInput; label: string }[] = [
   { key: "dateDernierContact", label: "Date du dernier contact" },
   { key: "dateProchaineRelance", label: "Date de prochaine relance" },
 ];
+function buildRelanceMessage(prospect: Prospect, calendlyLink: string){
+  const nom = prospect.nom || "";
+  const lien = calendlyLink || "https://calendly.com/pro-avi-seo/30min";
 
+  if (prospect.statut === "2e appel") {
+    return `Bonjour ${nom},
+
+Je me permets de revenir vers vous à la suite de mon précédent message, car je n'ai pas encore réussi à vous joindre concernant votre demande.
+
+Pour rappel, notre solution automatise la collecte des avis Google et le suivi de vos clients ou patients, avec une synchronisation directe à Doctolib pour ne rien ajouter à votre organisation actuelle. Résultat : une meilleure visibilité locale, sans y passer de temps.
+
+La présentation dure environ 15 à 20 minutes et ne vous engage à rien. Elle me permettra surtout de vous montrer ce que nous pourrions mettre en place spécifiquement pour votre activité.
+
+Vous pouvez réserver directement le créneau qui vous convient ici :
+${lien}
+
+Vous pouvez également me répondre directement sur WhatsApp, même simplement par :
+
+« Je suis intéressé(e) »
+« Rappelez-moi »
+ou
+« Ce n'est plus d'actualité »
+
+Cela me permettra de mettre correctement à jour votre demande.
+
+Bien cordialement,
+Moïse
+AVI SEO`;
+  }
+
+  return `Bonjour ${nom},
+
+Je viens d'essayer de vous joindre à la suite de votre demande d'informations concernant notre solution AVI SEO.
+
+J'ai pris le temps de regarder votre activité, et je pense que nous pourrions réellement vous accompagner pour développer plus régulièrement vos avis Google et améliorer votre visibilité locale. Notre solution se connecte directement à Doctolib pour automatiser le suivi de vos clients ou patients, sans vous ajouter de travail au quotidien.
+
+Je souhaitais simplement échanger quelques minutes avec vous afin de mieux comprendre votre besoin et vous présenter concrètement le fonctionnement.
+
+Vous pouvez choisir directement le créneau qui vous convient ici :
+${lien}
+
+Nous pouvons également échanger directement ici sur WhatsApp si cela est plus pratique pour vous. Vous pouvez simplement m'indiquer vos disponibilités ou me poser vos questions par message.
+
+Bien cordialement,
+Moïse
+AVI SEO`;
+}
 export default function ProspectDrawer({
   prospect,
   onClose,
@@ -147,7 +193,7 @@ export default function ProspectDrawer({
           )}
           {prospect.telephone && (
             <a
-              href={whatsappOpenLink(prospect.telephone)}
+              href={whatsappOpenLink(prospect.telephone, buildRelanceMessage(prospect, calendlyLink))}
               target="_blank"
               rel="noreferrer"
               className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-emerald-50 py-2 text-sm font-medium text-emerald-700 hover:bg-emerald-100"
