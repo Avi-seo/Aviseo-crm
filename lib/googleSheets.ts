@@ -140,10 +140,10 @@ function rowArrayToProspect(row: string[], rowIndex: number, headerMap: Record<s
   for (const field of Object.keys(FIELD_HEADER_CANDIDATES)) {
     const colIndex = headerMap[field];
     obj[field] = colIndex !== undefined ? row[colIndex] || "" : "";
-  }
-  return obj as Prospect;
-}
-
+   }
+ if (!obj.statut) obj.statut = "Nouveau lead";
+return obj as Prospect;
+   }
 // Construit une ligne complète (jusqu'à lastColumnIndex) en ne modifiant QUE les
 // colonnes que le CRM connaît ; toutes les autres colonnes existantes sont
 // préservées telles quelles (important : on ne veut jamais écraser une colonne
